@@ -34,7 +34,7 @@ const SignUpListener = () => {
             <h1 className="text-White text-[28px] font-bold">
               Join as a Listener 🎧
             </h1>
-            <div className="">
+            <div>
               <p className="text-GrayText text-[16px] font-semibold">
                 Listen to new music and earn by sharing your honest reviews.
               </p>

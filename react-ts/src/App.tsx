@@ -4,6 +4,7 @@ import WelcomePage from "./components/WelcomePage";
 import SignUpArtist from "./components/SignUpArtist";
 import SignUpListener from "./components/SignUpListener";
 import LogIn from "./components/LogIn";
+import EmailVerification from "./components/EmailVerification";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/signupartist" element={<SignUpArtist />} />
         <Route path="/signuplistener" element={<SignUpListener />} />
         <Route path="/login" element={<LogIn />} />
+        <Route path="/emailverification" element={<EmailVerification />} />
       </Routes>
     </Router>
   );
