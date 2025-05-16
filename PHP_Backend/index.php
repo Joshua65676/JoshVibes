@@ -1,3 +1,6 @@
+<?php
+require_once 'includes/database.php';
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">

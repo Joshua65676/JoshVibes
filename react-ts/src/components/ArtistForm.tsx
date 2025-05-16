@@ -5,18 +5,32 @@ import { Button } from "./ui/Button";
 const ArtistForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [message, setMessage] = useState("");
 
   const [formData, setFormData] = useState({
-    fullName: "",
+    name: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
-
   const [errors, setErrors] = useState({
     password: "",
     confirmPassword: "",
   });
+
+  
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const response = await fetch("http://localhost/music-app/signup.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...formData, userType: "artist" }),
+    });
+
+      const data = await response.text();
+    setMessage(data);
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -47,7 +61,7 @@ const ArtistForm = () => {
 
   return (
     <div className="">
-      <form className="flex flex-col gap-4">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         {/* Full Name */}
         <div className="flex flex-col gap-2">
           <label className="block text-left text-sm font-medium text-LightWhite">
@@ -55,6 +69,7 @@ const ArtistForm = () => {
           </label>
           <input
             type="text"
+            name="name"
             placeholder="Enter full name"
             className="w-full px-4 py-2 border rounded-md focus:ring focus:ring-blue-300"
             required
@@ -69,6 +84,7 @@ const ArtistForm = () => {
           </label>
           <input
             type="email"
+            name="email"
             placeholder="Enter email"
             className="w-full px-4 py-2 border rounded-md focus:ring focus:ring-blue-300"
             required
@@ -84,6 +100,7 @@ const ArtistForm = () => {
           <div className="relative">
             <input
               type={showPassword ? "text" : "password"}
+              name="password"
               placeholder="Enter password"
               className="w-full px-4 py-2 border rounded-md focus:ring focus:ring-blue-300"
               required
@@ -148,6 +165,7 @@ const ArtistForm = () => {
             </div>
           </div>
         </Button>
+        {message && <p className="text-center text-green-500">{message}</p>}
       </form>
     </div>
   );
