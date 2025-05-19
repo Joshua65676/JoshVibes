@@ -1,6 +1,7 @@
 <?php
-require_once 'includes/database.php';
+require_once './database.php';
 ?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,9 +9,7 @@ require_once 'includes/database.php';
     <title>JoshVibes</title>
 </head>
 <body>
-    <?php
-       echo "<h1>Hello World</h1>";
-       echo "<p>This is a simple PHP script.</p>";
-    ?>
+    <h1>Hello World</h1>
+    <p>This is a simple PHP script.</p>
 </body>
 </html>

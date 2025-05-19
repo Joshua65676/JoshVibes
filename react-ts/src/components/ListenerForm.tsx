@@ -1,10 +1,13 @@
 import { FaLongArrowAltRight, FaEye, FaEyeSlash } from "../assets";
 import { useState } from "react";
 import { Button } from "./ui/Button";
+import { useNavigate } from "react-router-dom";
 
 const ListenerForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -21,15 +24,31 @@ const ListenerForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
 
-    const response = await fetch("http://localhost/music-app/signup.php", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...formData, userType: "listener" }),
-    });
+    try {
+      const response = await fetch(
+        "http://localhost/joshvibes/PHP_Backend/signup.php",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...formData, userType: "listener" }),
+        }
+      );
 
-    const data = await response.text();
-    setMessage(data);
+      const data = await response.text();
+      setMessage(data);
+      setIsLoading(false);
+      if (data.includes("Signup successful")) {
+        setTimeout(() => {
+          navigate("/listenerHome");
+        }, 2000);
+      }
+    } catch (error) {
+      setMessage("An error occurred. Please try again.");
+      setIsLoading(false);
+      console.error("Error:", error);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -152,17 +171,33 @@ const ListenerForm = () => {
         </div>
 
         {/* Submit Button */}
-        <Button type="submit" className="w-[20] bg-[#1403f1] hover:bg-blue-500">
-          <div className="flex flex-row justify-around gap-8">
-            <span className="text-[#FFFFFF] text-[16px] font-semibold p-2">
-              Sign Up as a Listener
-            </span>
-            <div className="bg-[#FFFFFF] rounded-full p-2">
-              <FaLongArrowAltRight className="text-[#1403F1]" />
+        <Button
+          type="submit"
+          disabled={isLoading}
+          className="w-[20] bg-[#1403f1] hover:bg-blue-500"
+        >
+          {isLoading ? (
+            <p className="text-blue-500 text-center">Signing up...</p>
+          ) : (
+            <div className="flex flex-row justify-around gap-8">
+              <span className="text-[#FFFFFF] text-[16px] font-semibold p-2">
+                Sign Up as a Listener
+              </span>
+              <div className="bg-[#FFFFFF] rounded-full p-2">
+                <FaLongArrowAltRight className="text-[#1403F1]" />
+              </div>
             </div>
-          </div>
+          )}
         </Button>
-        {message && <p className="text-center text-green-500">{message}</p>}
+        {message && (
+          <p
+            className={`text-center ${
+              message.includes("successful") ? "text-green-500" : "text-red-500"
+            }`}
+          >
+            {message}
+          </p>
+        )}
       </form>
     </div>
   );

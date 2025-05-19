@@ -3,14 +3,13 @@
 $dbHost = "localhost";
 $dbUser = "root";
 $dbPass = "";
-$dbName = "joshvibs";
+$dbName = "joshvibes";
 
 $conn = new mysqli($dbHost, $dbUser, $dbPass, $dbName);
 
-if ($conn) {
-    echo "Database connected successfully!";
-} else {
-    die("Connection failed: " . $conn->connect_error);
+if ($conn->connect_error) {
+    die(json_encode(["success" => false, "message" => "Database connection failed: " . $conn->connect_error]));
 }
+
 
 ?>
