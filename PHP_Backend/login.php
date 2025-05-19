@@ -21,20 +21,20 @@ if (isset($data["email"]) && isset($data["password"])) {
     $stmt->execute();
     $stmt->store_result();
 
-    if ($stmt->num_rows === 0) {
+    if ($stmt->num_rows > 0) {
         $stmt->bind_result($id, $hashedPassword, $user_type);
         $stmt->fetch();
+
         if (password_verify($password, $hashedPassword)) {
             echo json_encode(["success" => true, "message" => "Login successful!", "userType" => $user_type]);
-            exit();
         } else {
             echo json_encode(["success" => false, "message" => "Invalid password."]);
-            exit();
         }
     } else {
-        echo json_encode(["success" => false, "message" => "Email not found.", "debug_email" => $email]]);
-        exit();
+        echo json_encode(["success" => false, "message" => "Email not found.", "debug_email" => $email]);
     }
+
+    exit();
 } else {
     echo json_encode(["success" => false, "message" => "Invalid request."]);
     exit();
