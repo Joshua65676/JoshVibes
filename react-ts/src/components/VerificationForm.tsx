@@ -1,55 +1,80 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Button } from "./ui/Button";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const VerificationForm = () => {
   const [code, setCode] = useState(Array(6).fill(""));
-  const [errors, setErrors] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const [message, setMessage] = useState("");
   const [timeLeft, setTimeLeft] = useState(30); // Countdown timer (in seconds)
-  const [canResend, setCanResend] = useState(false);
+  const [resending, setResending] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { email, userType } = location.state;
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (timeLeft > 0) {
       const timer = setInterval(() => setTimeLeft(timeLeft - 1), 1000);
       return () => clearInterval(timer);
-    } else {
-      setCanResend(true);
     }
   }, [timeLeft]);
 
-  const handleChange = (index: number, value: string) => {
-    if (!/^[0-9]$/.test(value) && value !== "") return;
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
     const newCode = [...code];
-    newCode[index] = value;
+    newCode[index] = e.target.value;
     setCode(newCode);
-    setErrors("");
-    if (value !== "" && index < 5) {
-      document.getElementById(`input-${index + 1}`)?.focus();
+    // Move to next input if user enters a digit
+    if (e.target.value && index < 5) {
+      inputRefs.current[index + 1]?.focus();
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (code.join("").length < 6) {
-      setErrors("Please enter all 6 digits.");
-      return;
-    }
-    // Simulated correct code (e.g., "123456")
-    if (code.join("") === "123456") {
-      setSuccessMessage("Verification successful! ✅");
-      setErrors("");
+    setLoading(true);
+
+    const response = await fetch(
+      "http://localhost/joshvibes/PHP_Backend/verifyCode.php",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, code: code.join("") }),
+      }
+    );
+
+    const data = await response.json();
+    setLoading(false);
+
+    if (data.success) {
+      if (userType === "artist") {
+        navigate("/ArtistsHome");
+      } else {
+        navigate("/ListenerHome");
+      }
     } else {
-      setErrors("Invalid code. Please try again.");
-      setSuccessMessage("");
+      setMessage(data.message);
     }
   };
 
-  const handleResend = () => {
-    setCode(Array(6).fill(""));
-    setTimeLeft(30);
-    setCanResend(false);
-    setErrors("");
-    setSuccessMessage("");
+  const handleResendCode = async () => {
+    setResending(true);
+    const response = await fetch(
+      "http://localhost/joshvibes/PHP_Backend/resendCode.php",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      }
+    );
+
+    const data = await response.json();
+    setResending(false);
+    setMessage(data.message);
+    setTimeLeft(30); // Reset the timer
   };
 
   return (
@@ -59,31 +84,32 @@ const VerificationForm = () => {
           {code.map((digit, index) => (
             <input
               key={index}
-              placeholder="0"
               id={`input-${index}`}
-              type="text"
-              maxLength={1}
               value={digit}
-              onChange={(e) => handleChange(index, e.target.value)}
+              placeholder="0"
+              type="text"
+              ref={el => (inputRefs.current[index] = el)}
+              maxLength={1}
+              onChange={(e) => handleChange(e, index)}
               className="w-12 h-12 text-center border rounded-md focus:ring focus:ring-blue-300 text-lg"
             />
           ))}
         </div>
         {/* Error Message */}
-        {errors && <p className="text-red-500 text-sm mt-2">{errors}</p>}
+        {/* {errors && <p className="text-red-500 text-sm mt-2">{errors}</p>} */}
         {/* Success Message */}
-        {successMessage && (
-          <p className="text-green-500 text-sm mt-2">{successMessage}</p>
-        )}
+        {message && <p className="text-green-500 text-sm mt-2">{message}</p>}
 
         {/* Resend Code Timer */}
         <p className="text-gray-600 text-sm mt-2">
-          {canResend ? (
+          {timeLeft === 0 ? (
             <button
-              onClick={handleResend}
+              type="button"
+              onClick={handleResendCode}
               className="text-blue-500 hover:underline"
+              disabled={resending}
             >
-              Resend Code
+              {resending ? "Resending..." : "Resend Code"}
             </button>
           ) : (
             `Resend code in ${timeLeft} seconds`
@@ -93,8 +119,9 @@ const VerificationForm = () => {
         <Button
           type="submit"
           className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
+          disabled={loading}
         >
-          Verify Code
+          {loading ? "Loading..." : "Verify Code"}
         </Button>
       </form>
     </div>
