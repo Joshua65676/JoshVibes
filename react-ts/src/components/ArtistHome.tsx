@@ -1,11 +1,15 @@
 // import React from 'react'
-
+import Navbar from "./Navbar";
 const ArtistHome = () => {
   return (
-    <div>
-      welcome to artist home
-    </div>
-  )
-}
+    <section>
+      <main>
+        <div>
+          <Navbar />
+        </div>
+      </main>
+    </section>
+  );
+};
 
-export default ArtistHome
+export default ArtistHome;

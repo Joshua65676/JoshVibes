@@ -8,6 +8,12 @@ import  musicPics_2  from "./images/musicPics_2.jpg"
 import  musicPics_3  from "./images/musicPics_3.jpg"
 import musicVid_1 from "./videos/musicVid_1.mp4"
 import musicVid_2 from "./videos/musicVid_2.mp4"
+import { MdArrowBackIos } from "react-icons/md";
+import { IoHome } from "react-icons/io5";
+import { FaSearch } from "react-icons/fa";
+import { IoMdNotifications } from "react-icons/io";
+import { TbCategoryFilled } from "react-icons/tb";
+import Profile from "./profile.svg"
 
 
 export {
@@ -21,5 +27,11 @@ export {
     musicPics_2,
     musicPics_3,
     musicVid_1,
-    musicVid_2
+    musicVid_2,
+    MdArrowBackIos,
+    IoHome,
+    FaSearch,
+    IoMdNotifications,
+    TbCategoryFilled,
+    Profile
 }
