@@ -7,6 +7,7 @@ import LogIn from "./components/LogIn";
 import EmailVerification from "./components/EmailVerification";
 import ArtistHome from "./components/ArtistHome";
 import ListenerHome from "./components/ListenerHome";
+import Create from "./components/Create";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/emailverification" element={<EmailVerification />} />
         <Route path="/artistHome" element={<ArtistHome />} />
         <Route path="/listenerHome" element={<ListenerHome />} />
+        <Route path="/create" element={<Create />} />
       </Routes>
     </Router>
   );

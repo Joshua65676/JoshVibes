@@ -1,5 +1,6 @@
 import WelcomePics from "./welcomepics.svg"
 import { FaLongArrowAltRight } from "react-icons/fa";
+import { IoChevronDown } from "react-icons/io5";
 import WallPaper from "./wallpaper_pics.svg";
 import { FaArrowLeft } from "react-icons/fa6";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -42,5 +43,6 @@ export {
     Retention,
     SkipRate,
     SongUpload,
-    CreateButton
+    CreateButton,
+    IoChevronDown
 }
