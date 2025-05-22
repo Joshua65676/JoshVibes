@@ -1,5 +1,5 @@
 import React from "react";
-import { IoMdNotifications }  from "../assets/index";
+import { IoMdNotifications }  from "../../assets/index";
 const NotificationButton: React.FC = () => {
   return (
     <section>

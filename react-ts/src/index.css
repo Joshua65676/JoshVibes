@@ -3,6 +3,7 @@
   --color-White: #ffffff;
   --color-Bule: #1403f1;
   --color-GrayText: #999999;
+  --color-GrayBg: rgba(60, 60, 67, 0.29);
   --color-LightWhite: #f2f2f7;
 }
 
@@ -32,7 +33,6 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;

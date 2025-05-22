@@ -1,5 +1,5 @@
 // import React from 'react'
-import { FaSearch } from "../assets/index";
+import { FaSearch } from "../../assets/index";
 const SearchButton: React.FC = () => {
   return (
     <main>

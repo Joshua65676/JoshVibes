@@ -1,10 +1,10 @@
 import { MdArrowBackIos } from "../assets/index";
 import { useNavigate } from "react-router-dom";
-import CategoryButton from "./CategoryButton";
-import HomeButtonArtist from "./HomeButtonArtist";
-import SearchButton from "./SearchButton";
+import CategoryButton from "./ui/CategoryButton";
+import HomeButtonArtist from "./ui/HomeButtonArtist";
+import SearchButton from "./ui/SearchButton";
 import { useEffect, useState } from "react";
-import NotificationButton from "./NotificationButton";
+import NotificationButton from "./ui/NotificationButton";
 import ArtistProfile from "./ArtistProfile";
 const Navbar: React.FC = () => {
   const [stickyClass, setStickyClass] = useState<boolean>(false);

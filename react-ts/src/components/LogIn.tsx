@@ -1,6 +1,6 @@
 import { FaArrowLeft, musicVid_1 } from "../assets";
 import { Link, useNavigate } from "react-router-dom";
-import LoginForm from "./LogInForm";
+import LoginForm from "./form/LogInForm";
 
 const LogIn = () => {
   const navigate = useNavigate();

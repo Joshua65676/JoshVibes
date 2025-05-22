@@ -1,6 +1,6 @@
 // import React from "react";
 import { useNavigate } from "react-router-dom";
-import { TbCategoryFilled } from "../assets/index";
+import { TbCategoryFilled } from "../../assets/index";
 
 const CategoryButton: React.FC = () => {
   const navigate = useNavigate();

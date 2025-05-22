@@ -14,7 +14,11 @@ import { FaSearch } from "react-icons/fa";
 import { IoMdNotifications } from "react-icons/io";
 import { TbCategoryFilled } from "react-icons/tb";
 import Profile from "./profile.svg"
-
+import PlaySong from "./play-song.svg"
+import Retention from "./rentation.svg"
+import SkipRate from "./skip-rate.svg"
+import SongUpload from "./song-upload.svg"
+import CreateButton from "./create-button.svg"
 
 export {
     WelcomePics,
@@ -33,5 +37,10 @@ export {
     FaSearch,
     IoMdNotifications,
     TbCategoryFilled,
-    Profile
+    Profile,
+    PlaySong,
+    Retention,
+    SkipRate,
+    SongUpload,
+    CreateButton
 }

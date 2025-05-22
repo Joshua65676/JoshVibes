@@ -1,6 +1,6 @@
 import { FaArrowLeft, musicPics_1 } from "../assets";
 import { useNavigate } from "react-router-dom";
-import VerificationForm from "./VerificationForm";
+import VerificationForm from "./form/VerificationForm";
 const EmailVerification = () => {
   const navigate = useNavigate();
   return (

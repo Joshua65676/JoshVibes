@@ -1,6 +1,6 @@
 import { FaArrowLeft, musicPics_2 } from "../assets";
 import { Link, useNavigate } from "react-router-dom";
-import ArtistForm from "./ArtistForm";
+import ArtistForm from "./form/ArtistForm";
 
 const SignUpArtist = () => {
   const navigate = useNavigate();

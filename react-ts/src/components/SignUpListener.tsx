@@ -1,6 +1,6 @@
 import { FaArrowLeft, musicPics_3 } from "../assets";
 import { Link, useNavigate } from "react-router-dom";
-import ListenerForm from "./ListenerForm";
+import ListenerForm from "./form/ListenerForm";
 
 const SignUpListener = () => {
   const navigate = useNavigate();

@@ -1,6 +1,6 @@
 // import React from "react";
 import { Link } from "react-router-dom";
-import { IoHome } from "../assets/index"; // Adjust the import path as necessary
+import { IoHome } from "../../assets/index"; // Adjust the import path as necessary
 
 const HomeButtonArtist: React.FC = () => {
   return (

@@ -1,6 +1,6 @@
-import { FaLongArrowAltRight, FaEye, FaEyeSlash } from "../assets";
+import { FaLongArrowAltRight, FaEye, FaEyeSlash } from "../../assets/index";
 import { useState } from "react";
-import { Button } from "./ui/Button";
+import { Button } from "../ui/Button";
 import { useNavigate } from "react-router-dom";
 
 const ArtistForm = () => {
