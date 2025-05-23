@@ -13,19 +13,23 @@ const AudioUpload: React.FC = () => {
   };
 
   return (
-    <div className="">
-      <label className="text-White font-semibold">Upload Audio File</label>
-      <div className="flex items-center gap-4">
-        <input
-          type="file"
-          accept="audio/*"
-          placeholder="Upload Audio File"
-          onChange={handleAudioUpload}
-          className="border p-2 rounded-md"
-        />
-        {audioFileName && (
-          <span className="text-gray-600">{audioFileName}</span>
-        )}
+    <div className="flex flex-col gap-3">
+      <span className="text-White font-semibold">Upload Audio File</span>
+      <div className="flex flex-row items-center gap-4 border justify-center rounded-xl w-[20rem]">
+        <label className="cursor-pointer items-center text-white p-4 rounded-xl justify-center">
+          <span className="text-sm text-Bule">Choose File</span>
+          <hr className="border-2 mt-1 text-Bule w-20 -ml-0.5 rounded-b-xl"/>
+          <input
+            type="file"
+            accept="audio/*"
+            onChange={handleAudioUpload}
+            className="hidden"
+          />
+        </label>
+        <span>|</span>
+        <span className="text-gray-500 text-[14px] font-semibold">
+          {audioFileName ? audioFileName : "No file chosen"}
+        </span>
       </div>
     </div>
   );

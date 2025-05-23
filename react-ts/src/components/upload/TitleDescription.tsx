@@ -5,7 +5,7 @@ const TitleDescription: React.FC = () => {
     <div>
       <div className="flex flex-row justify-between gap-4">
         {/* Song Title */}
-        <div>
+        <div className="w-[20rem] flex flex-col gap-3">
           <label className="text-White font-semibold">Song Title</label>
           <input
             type="text"
@@ -14,11 +14,11 @@ const TitleDescription: React.FC = () => {
           />
         </div>
         {/* Description */}
-        <div className="mt-4">
+        <div className="w-[20rem] flex flex-col gap-3">
           <label className="text-White font-semibold">Description</label>
           <textarea
             placeholder="Enter Description"
-            className="border p-2 rounded-md w-full h-24"
+            className="border p-2 rounded-md w-full h-20"
           ></textarea>
         </div>
       </div>
