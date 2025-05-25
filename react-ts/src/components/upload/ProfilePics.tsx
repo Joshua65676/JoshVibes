@@ -38,7 +38,7 @@ const ProfilePics: React.FC = () => {
             <img
               src={image}
               alt="Profile"
-              className="w-24 h-24 rounded-full object-cover mt-2"
+              className="w-20 h-20 rounded-full object-cover relative -top-28"
             />
           )}
         </div>

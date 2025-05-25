@@ -20,6 +20,7 @@ import Retention from "./rentation.svg"
 import SkipRate from "./skip-rate.svg"
 import SongUpload from "./song-upload.svg"
 import CreateButton from "./create-button.svg"
+import createPic from "./images/createPic.jpg"
 
 export {
     WelcomePics,
@@ -44,5 +45,6 @@ export {
     SkipRate,
     SongUpload,
     CreateButton,
-    IoChevronDown
+    IoChevronDown,
+    createPic
 }

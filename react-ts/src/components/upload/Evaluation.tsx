@@ -13,37 +13,40 @@ const Evaluation: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-3 w-64">
+    <section className="flex flex-col items-center gap-3 w-[20rem]">
       <label className="text-White font-semibold">How many evaluations?</label>
       {/* Select Input */}
-      <div className="relative w-full border rounded-xl">
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="w-full flex items-center justify-between border p-2 rounded-md"
-        >
-          <span>{selectedOption || "Select here"}</span>
-          <IoChevronDown className="text-gray-600" />
-        </button>
+      <main className="flex flex-col w-full">
+        <div className="relative w-full border rounded-xl">
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="w-full flex items-center justify-between border p-2 rounded-md"
+          >
+            <span>{selectedOption || "Select here"}</span>
+            <IoChevronDown className="text-gray-600" />
+          </button>
 
-        {/* Dropdown List */}
-        {isOpen && (
-          <ul className="absolute left-0 top-full mt-1 w-full border rounded-md shadow-lg">
-            {options.map((option, index) => (
-              <li
-                key={index}
-                className="p-2 hover:bg-gray-600 cursor-pointer"
-                onClick={() => handleSelect(option)}
-              >
-                {option}
-              </li>
-            ))}
-          </ul>
+          {/* Dropdown List */}
+          {isOpen && (
+            <ul className="absolute left-0 top-full mt-1 w-full bg-black border rounded-md shadow-lg">
+              {options.map((option, index) => (
+                <li
+                  key={index}
+                  className="p-2 hover:bg-gray-600 cursor-pointer"
+                  onClick={() => handleSelect(option)}
+                >
+                  {option}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+        {/* Selected Value Display */}
+        {selectedOption && (
+          <div className="text-gray-600 text-start relative top-1 left-3 font-bold text-[16px] -mb-3">{selectedOption}</div>
         )}
-      </div>
-
-      {/* Selected Value Display */}
-      {selectedOption && <div className="text-gray-600">{selectedOption}</div>}
-    </div>
+      </main>
+    </section>
   );
 };
 
