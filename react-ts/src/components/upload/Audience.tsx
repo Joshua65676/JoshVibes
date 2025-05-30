@@ -1,15 +1,21 @@
 import { useState } from "react";
 import { IoChevronDown } from "../../assets";
 
-const Audience: React.FC = () => {
+interface AudienceProps {
+  value: string;
+  onChange: (value: string) => void;
+}
+
+const Audience: React.FC<AudienceProps> = ({ value, onChange }) => {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [isOpen, setIsOpen] = useState(false);
 
-  const options = ["Option 1", "Option 2", "Option 3", "Option 4", "null"];
+  const audienceOptions = ["Public", "Private", "Friends", "Subscribers"];
 
   const handleSelect = (option: string) => {
     setSelectedOption(option);
-    setIsOpen(false); // Close dropdown after selection
+    setIsOpen(false);
+    onChange(option);
   };
   return (
     <section className="flex flex-col items-center gap-3 w-[20rem]">
@@ -21,17 +27,19 @@ const Audience: React.FC = () => {
             onClick={() => setIsOpen(!isOpen)}
             className="w-full flex items-center justify-between border p-2 rounded-md"
           >
-            <span>{selectedOption || "Select here"}</span>
+            <span>{value || "Select here"}</span>
             <IoChevronDown className="text-gray-600" />
           </button>
 
           {/* Dropdown List */}
           {isOpen && (
             <ul className="absolute left-0 top-full mt-1 w-full bg-black border rounded-md shadow-lg">
-              {options.map((option, index) => (
+              {audienceOptions.map((option) => (
                 <li
-                  key={index}
-                  className="p-2 hover:bg-gray-600 cursor-pointer"
+                  key={option}
+                  className={`p-2 cursor-pointer ${
+                    value === option ? "hover:bg-gray-600" : ""
+                  }`}
                   onClick={() => handleSelect(option)}
                 >
                   {option}
@@ -43,7 +51,9 @@ const Audience: React.FC = () => {
 
         {/* Selected Value Display */}
         {selectedOption && (
-          <div className="text-gray-600 text-start relative top-1 left-3 font-bold text-[16px] -mb-3">{selectedOption}</div>
+          <div className="text-gray-600 text-start relative top-1 left-3 font-bold text-[16px] -mb-3">
+            {selectedOption}
+          </div>
         )}
       </main>
     </section>

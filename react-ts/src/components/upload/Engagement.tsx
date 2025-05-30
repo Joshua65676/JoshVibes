@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 
-const Engagement: React.FC = () => {
-  const [selectedOptions, setSelectedOptions] = useState<string>("");
+interface EngagementProps {
+  value: string[];
+  onChange: (value: string[]) => void;
+}
+
+const Engagement: React.FC<EngagementProps> = ({ value, onChange }) => {
+  const [selectedOptions, setSelectedOptions] = useState<string[]>(value || []);
 
   const options = [
     "Skip Rate",
@@ -11,11 +16,14 @@ const Engagement: React.FC = () => {
   ];
 
   const handleSelect = (option: string) => {
-    setSelectedOptions((prev) =>
-      prev.includes(option)
-        ? prev.filter((item) => item !== option)
-        : [...prev, option]
-    );
+    let updatedOptions;
+    if (selectedOptions.includes(option)) {
+      updatedOptions = selectedOptions.filter((item) => item !== option);
+    } else {
+      updatedOptions = [...selectedOptions, option];
+    }
+    setSelectedOptions(updatedOptions);
+    onChange(updatedOptions); // <-- call onChange with the new array
   };
 
   return (
@@ -24,9 +32,9 @@ const Engagement: React.FC = () => {
         <label className="text-White font-semibold">Engagement Metrics</label>
         {/* Engagement Options */}
         <div className="flex flex-row gap-4">
-          {options.map((option, index) => (
+          {options.map((option) => (
             <label
-              key={index}
+              key={option}
               className="flex items-center gap-2 cursor-pointer"
             >
               <input

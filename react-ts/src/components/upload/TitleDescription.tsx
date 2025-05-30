@@ -1,6 +1,17 @@
 import React from "react";
+interface TitleDescriptionProps {
+  title: string;
+  description: string;
+  onTitleChange: (value: string) => void;
+  onDescriptionChange: (value: string) => void;
+}
 
-const TitleDescription: React.FC = () => {
+const TitleDescription: React.FC<TitleDescriptionProps> = ({
+  title,
+  description,
+  onTitleChange,
+  onDescriptionChange,
+}) => {
   return (
     <div>
       <div className="flex flex-row justify-between gap-4">
@@ -10,6 +21,9 @@ const TitleDescription: React.FC = () => {
           <input
             type="text"
             placeholder="Enter Song Title"
+            value={title}
+            onChange={(e) => onTitleChange(e.target.value)}
+            required
             className="border p-2 rounded-md w-full"
           />
         </div>
@@ -18,6 +32,9 @@ const TitleDescription: React.FC = () => {
           <label className="text-White font-semibold">Description</label>
           <textarea
             placeholder="Enter Description"
+            value={description}
+            onChange={(e) => onDescriptionChange(e.target.value)}
+            required
             className="border p-2 rounded-md w-full h-20"
           ></textarea>
         </div>

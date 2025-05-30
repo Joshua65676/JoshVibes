@@ -1,15 +1,20 @@
 import { useState } from "react";
 import { IoCloudUploadOutline } from "react-icons/io5";
 
-const ProfilePics: React.FC = () => {
+interface ProfilePicsProps {
+  onChanges: (file: File | null) => void;
+}
+const ProfilePics: React.FC<ProfilePicsProps> = ({ onChanges }) => {
   const [image, setImage] = useState<string | null>(null);
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file && (file.type === "image/png" || file.type === "image/jpeg")) {
       setImage(URL.createObjectURL(file));
+      onChanges(file);
     } else {
       alert("Only PNG and JPEG images are allowed.");
+      onChanges(null);
     }
   };
 
@@ -31,7 +36,9 @@ const ProfilePics: React.FC = () => {
           </label>
 
           {/* Supported Formats */}
-          <p className="text-gray-500 text-sm font-semibold">Support: JPEG, PNG</p>
+          <p className="text-gray-500 text-sm font-semibold">
+            Support: JPEG, PNG
+          </p>
 
           {/* Preview Image */}
           {image && (

@@ -7,9 +7,45 @@ import ProfilePics from "./upload/ProfilePics";
 import TitleDescription from "./upload/TitleDescription";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft, createPic } from "../assets";
+import { useState } from "react";
+import axios from "axios";
 
 const Create: React.FC = () => {
+  const [title, setTitle] = useState("");
+  const [profilePic, setProfilePic] = useState<File | null>(null);
+  const [audio, setAudio] = useState<File | null>(null);
+  const [audience, setAudience] = useState("");
+  const [evaluation, setEvaluation] = useState("");
+  const [engagement, setEngagement] = useState<string[]>([]);
+  const [description, setDescription] = useState("");
   const navigate = useNavigate();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    if (profilePic) formData.append("profile_pics", profilePic);
+    if (audio) formData.append("audio", audio);
+    formData.append("audience", audience);
+    formData.append("evaluation", evaluation);
+    formData.append("engagement", JSON.stringify(engagement));
+
+    try {
+      const response = await axios.post(
+        "http://localhost/joshvibes/PHP_Backend/add_songs.php",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
+
+      alert(response.data);
+    } catch (error) {
+      console.error("Error uploading song:", error);
+      alert("Upload failed. Please try again.");
+    }
+  };
 
   return (
     <section className="container max-w-7xl mx-auto w-full">
@@ -36,24 +72,36 @@ const Create: React.FC = () => {
             />
           </div>
         </div>
-        <main className="flex flex-col gap-7 justify-center items-center">
+        {/* Main Form Area */}
+        <main
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-7 justify-center items-center"
+        >
           {/* Profile Picture and Audio Upload */}
           <div className="flex flex-row justify-between gap-4">
-            <ProfilePics />
-            <AudioUpload />
+            <ProfilePics onChanges={setProfilePic} />
+            <AudioUpload onChange={setAudio} />
           </div>
           {/* Song Title and Description */}
           <div className="flex flex-row justify-between gap-4">
-            <TitleDescription />
+            <TitleDescription
+              title={title}
+              description={description}
+              onTitleChange={setTitle}
+              onDescriptionChange={setDescription}
+            />
           </div>
           {/* Evaluation and Audience */}
           <div className="flex flex-row justify-between gap-4">
-            <Evaluation />
-            <Audience />
+            <Evaluation value={evaluation} onChange={setEvaluation} />
+            <Audience value={audience} onChange={setAudience} />
           </div>
-          <Engagement />
+          <Engagement value={engagement} onChange={setEngagement} />
           <div>
-            <Button className="w-[24rem] mt-5 bg-Bule hover:bg-blue-500">
+            <Button
+              type="submit"
+              className="w-[24rem] mt-5 bg-Bule hover:bg-blue-500"
+            >
               <span className="text-White font-bold text-xl">Created</span>
             </Button>
           </div>

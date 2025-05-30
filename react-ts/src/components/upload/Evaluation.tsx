@@ -1,15 +1,21 @@
 import { useState } from "react";
 import { IoChevronDown } from "../../assets";
 
-const Evaluation: React.FC = () => {
+interface EvaluationProps {
+  value: string;
+  onChange: (value: string) => void;
+}
+
+const Evaluation: React.FC<EvaluationProps> = ({ value, onChange}) => {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [isOpen, setIsOpen] = useState(false);
 
-  const options = ["Option 1", "Option 2", "Option 3", "Option 4", "null"];
+  const EvaluationOptions = ["Excellent", "Standard", "Trending", "Needs improvement", "null"];
 
   const handleSelect = (option: string) => {
     setSelectedOption(option);
     setIsOpen(false); // Close dropdown after selection
+    onChange(option); // Call onChange with the selected value
   };
 
   return (
@@ -22,16 +28,16 @@ const Evaluation: React.FC = () => {
             onClick={() => setIsOpen(!isOpen)}
             className="w-full flex items-center justify-between border p-2 rounded-md"
           >
-            <span>{selectedOption || "Select here"}</span>
+            <span>{value || "Select here"}</span>
             <IoChevronDown className="text-gray-600" />
           </button>
 
           {/* Dropdown List */}
           {isOpen && (
             <ul className="absolute left-0 top-full mt-1 w-full bg-black border rounded-md shadow-lg">
-              {options.map((option, index) => (
+              {EvaluationOptions.map((option) => (
                 <li
-                  key={index}
+                  key={option}
                   className="p-2 hover:bg-gray-600 cursor-pointer"
                   onClick={() => handleSelect(option)}
                 >

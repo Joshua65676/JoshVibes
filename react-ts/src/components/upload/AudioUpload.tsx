@@ -1,14 +1,20 @@
 import { useState } from "react";
 
-const AudioUpload: React.FC = () => {
+interface AudioUploadProps {
+  onChange: (file: File | null) => void;
+}
+
+const AudioUpload: React.FC<AudioUploadProps> = ({ onChange }) => {
   const [audioFileName, setAudioFileName] = useState<string | null>(null);
 
   const handleAudioUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file && file.type.startsWith("audio/")) {
       setAudioFileName(file.name);
+      onChange(file);
     } else {
       alert("Please upload a valid audio file.");
+      onChange(null);
     }
   };
 
