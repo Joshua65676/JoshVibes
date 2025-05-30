@@ -1,6 +1,18 @@
 <?php
 include './database.php'; // Include database connection
 
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: Content-Type");
+header("Access-Control-Allow-Methods: POST, OPTIONS");
+
+// Auto-create upload folders if they don't exist
+if (!is_dir('uploads/profile_pics')) {
+    mkdir('uploads/profile_pics', 0777, true);
+}
+if (!is_dir('uploads/audio')) {
+    mkdir('uploads/audio', 0777, true);
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_id = $_POST['user_id']; // User ID
     $title = $_POST['title'];
@@ -10,25 +22,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $engagement = $_POST['engagement'];
 
     // Handling Profile Picture Upload
-    $profilePicName = $_FILES['profile_pics']['name'];
-    $profilePicTmpName = $_FILES['profile_pics']['tmp_name'];
+    $profilePicName = $_FILES['profile_pics']['name'] ?? null;
+    $profilePicTmpName = $_FILES['profile_pics']['tmp_name'] ?? null;
     $profilePicPath = "uploads/profile_pics/" . $profilePicName;
-    move_uploaded_file($profilePicTmpName, $profilePicPath);
+    $profilePicUploaded = false;
+    if ($profilePicTmpName && is_uploaded_file($profilePicTmpName)) {
+        $profilePicUploaded = move_uploaded_file($profilePicTmpName, $profilePicPath);
+    }
 
     // Handling Audio File Upload
-    $audioName = $_FILES['audio']['name'];
-    $audioTmpName = $_FILES['audio']['tmp_name'];
+    $audioName = $_FILES['audio']['name'] ?? null;
+    $audioTmpName = $_FILES['audio']['tmp_name'] ?? null;
     $audioPath = "uploads/audio/" . $audioName;
-    move_uploaded_file($audioTmpName, $audioPath);
+    $audioUploaded = false;
+    if ($audioTmpName && is_uploaded_file($audioTmpName)) {
+        $audioUploaded = move_uploaded_file($audioTmpName, $audioPath);
+    }
+
+    if (!$profilePicUploaded || !$audioUploaded) {
+        echo json_encode(["success" => false, "message" => "File upload failed."]);
+        exit;
+    }
 
     // Insert into database
     $sql = "INSERT INTO songs (user_id, profile_pics, audio, title, description, evaluation, audience, engagement) 
             VALUES ('$user_id', '$profilePicPath', '$audioPath', '$title', '$description', '$evaluation', '$audience', '$engagement')";
 
     if ($conn->query($sql) === TRUE) {
-        echo "Song uploaded successfully!";
+    echo json_encode(["success" => true, "message" => "Song uploaded successfully!"]);
     } else {
-        echo "Error: " . $conn->error;
+       echo json_encode(["success" => false, "message" => "Error: " . $conn->error]);
     }
 }
 

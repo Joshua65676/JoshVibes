@@ -18,15 +18,19 @@ const Create: React.FC = () => {
   const [evaluation, setEvaluation] = useState("");
   const [engagement, setEngagement] = useState<string[]>([]);
   const [description, setDescription] = useState("");
+  const userId = localStorage.getItem("user_id") || "";
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
+    setLoading(true);
     e.preventDefault();
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
     if (profilePic) formData.append("profile_pics", profilePic);
     if (audio) formData.append("audio", audio);
+    formData.append("user_id", userId);
     formData.append("audience", audience);
     formData.append("evaluation", evaluation);
     formData.append("engagement", JSON.stringify(engagement));
@@ -40,10 +44,17 @@ const Create: React.FC = () => {
         }
       );
 
-      alert(response.data);
+      if (response.data && response.data.success) {
+        alert(response.data.message || "Song uploaded successfully!");
+        navigate("/ArtistsHome");
+      } else {
+        alert(response.data.message || "Upload failed. Please try again.");
+      }
     } catch (error) {
       console.error("Error uploading song:", error);
       alert("Upload failed. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -73,7 +84,7 @@ const Create: React.FC = () => {
           </div>
         </div>
         {/* Main Form Area */}
-        <main
+        <form
           onSubmit={handleSubmit}
           className="flex flex-col gap-7 justify-center items-center"
         >
@@ -100,12 +111,12 @@ const Create: React.FC = () => {
           <div>
             <Button
               type="submit"
-              className="w-[24rem] mt-5 bg-Bule hover:bg-blue-500"
+              className="w-[24rem] mt-5 bg-Bule hover:bg-blue-500 text-White font-bold text-xl"
             >
-              <span className="text-White font-bold text-xl">Created</span>
+              {loading ? "Uploadig...." : "Upload"}
             </Button>
           </div>
-        </main>
+        </form>
       </main>
     </section>
   );
