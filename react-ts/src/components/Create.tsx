@@ -46,7 +46,7 @@ const Create: React.FC = () => {
 
       if (response.data && response.data.success) {
         alert(response.data.message || "Song uploaded successfully!");
-        navigate("/ArtistsHome");
+        navigate("/artistHome");
       } else {
         alert(response.data.message || "Upload failed. Please try again.");
       }
