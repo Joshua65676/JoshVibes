@@ -5,7 +5,7 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 
 // Fetch uploads, newest first
-$sql = "SELECT profile_pics, title, created_at FROM songs ORDER BY created_at DESC";
+$sql = "SELECT id, profile_pics, title, created_at FROM songs ORDER BY created_at DESC";
 $result = $conn->query($sql);
 
 $uploads = [];

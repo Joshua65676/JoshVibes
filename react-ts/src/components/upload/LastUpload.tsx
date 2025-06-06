@@ -4,6 +4,7 @@ import { CreateButton } from "../../assets";
 import UploadDots from "./UploadDots";
 
 interface Upload {
+  id: number;
   profile_pics: string;
   title: string;
 }
@@ -17,6 +18,27 @@ const LastUpload: React.FC = () => {
       .then((data) => setUploads(data))
       .catch((err) => console.error("Failed to fetch uploads:", err));
   }, []);
+
+  const handleDeleteSong = async (id: number) => {
+    try {
+      const response = await fetch(
+        `http://localhost/joshvibes/PHP_Backend/delete_song.php?id=${id}`,
+        {
+          method: "DELETE",
+        }
+      );
+      const data = await response.json();
+      if (data.success) {
+        setUploads((prev) => prev.filter((upload) => upload.id !== id));
+        alert("Song deleted successfully!");
+      } else {
+        alert(data.message || "Failed to delete song.");
+      }
+    } catch (error) {
+      alert("Error deleting song.");
+      console.error(error);
+    }
+  };
 
   return (
     <section className="container max-w-7xl mx-auto w-full -ml-7">
@@ -53,7 +75,12 @@ const LastUpload: React.FC = () => {
                   </span>
                 </div>
                 <div className="flex items-center justify-center">
-                  <UploadDots />
+                  <UploadDots
+                    key={upload.id}
+                    songId={upload.id}
+                    songTitle={upload.title}
+                    onDelete={handleDeleteSong}
+                  />
                 </div>
               </div>
             ))}
