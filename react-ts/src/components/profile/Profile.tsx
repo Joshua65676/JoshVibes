@@ -1,9 +1,10 @@
 import React from 'react'
+import ProfilePics from './ProfilePics'
 
 const Profiles: React.FC = () => {
   return (
     <div>
-      Profile
+      <ProfilePics />
     </div>
   )
 }

@@ -2,14 +2,16 @@ import React, { useState } from "react";
 import { Profile } from "../assets/index";
 import Profiles from "./profile/Profile";
 import LogOut from "./profile/LogOut";
-
-const ProfileSection = [
-  { label: "Profile", Component: Profiles },
-  { label: "Log Out", Component: LogOut },
-];
+import Password from "./profile/Password";
 
 const ArtistProfile: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [modal, setModal] = useState<"profile" | "password" | "logout" | null>(null);
+
+  // Close modal when clicking outside
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) setModal(null);
+  };
 
   return (
     <section>
@@ -31,14 +33,55 @@ const ArtistProfile: React.FC = () => {
           </button>
         </div>
         {isOpen && (
-          <div className="absolute right-27 mt-1 w-55 bg-gray-900 rounded-xl shadow-2xl z-50 p-2">
-            <ul className="flex flex-col gap-">
-              {ProfileSection.map(({ Component }, index) => (
-                <li key={index} className="hover:bg-gray-800 rounded-lg transition p-3 cursor-pointer">
-                  <Component />
-                </li>
-              ))}
+          <div className="absolute right-37 mt-3 w-40 bg-gray-900 rounded-xl shadow-2xl z-50 p-2">
+            <ul className="flex flex-col gap-2">
+              <li
+                className="hover:bg-gray-800 rounded-lg transition p-3 cursor-pointer text-white"
+                onClick={() => {
+                  setModal("profile");
+                  setIsOpen(false);
+                }}
+              >
+                View Profile
+              </li>
+              <li
+                className="hover:bg-gray-800 rounded-lg transition p-3 cursor-pointer text-white"
+                onClick={() => {
+                  setModal("password");
+                  setIsOpen(false);
+                }}
+              >
+                Password
+              </li>
+              <li
+                className="hover:bg-gray-800 rounded-lg transition p-3 cursor-pointer text-white"
+                onClick={() => {
+                  setModal("logout");
+                  setIsOpen(false);
+                }}
+              >
+                Log Out
+              </li>
             </ul>
+          </div>
+        )}
+        {/* Modal for Profile or Log Out */}
+        {modal && (
+          <div
+            className="fixed inset-0 bg-opacity-10 flex items-center justify-center z-50"
+            onClick={handleBackdropClick}
+          >
+            <div className="bg-gray-900 p-8 rounded-xl shadow-2xl min-w-[300px] relative">
+              <button
+                className="absolute top-2 right-4 text-gray-400 hover:text-white text-xl"
+                onClick={() => setModal(null)}
+              >
+                &times;
+              </button>
+              {modal === "profile" && <Profiles />}
+              {modal === "logout" && <LogOut />}
+              {modal === "password" && <Password />}
+            </div>
           </div>
         )}
       </main>
