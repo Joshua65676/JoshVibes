@@ -17,9 +17,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_id = $_POST['user_id']; // User ID
     $title = $_POST['title'];
     $description = $_POST['description'];
-    $evaluation = $_POST['evaluation'];
     $audience = $_POST['audience'];
     $engagement = $_POST['engagement'];
+    $category_id = $_POST['category_id'];
 
     // Handling Profile Picture Upload
     $profilePicName = $_FILES['profile_pics']['name'] ?? null;
@@ -45,8 +45,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Insert into database
-    $sql = "INSERT INTO songs (user_id, profile_pics, audio, title, description, evaluation, audience, engagement) 
-            VALUES ('$user_id', '$profilePicPath', '$audioPath', '$title', '$description', '$evaluation', '$audience', '$engagement')";
+    $sql = "INSERT INTO songs (user_id, profile_pics, audio, title, description, audience, engagement, category_id)
+            VALUES ('$user_id', '$profilePicPath', '$audioPath', '$title', '$description', '$audience', '$engagement', '$category_id')";
 
     if ($conn->query($sql) === TRUE) {
     echo json_encode(["success" => true, "message" => "Song uploaded successfully!"]);

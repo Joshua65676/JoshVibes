@@ -2,9 +2,9 @@ import { Button } from "./ui/Button";
 import Audience from "./upload/Audience";
 import AudioUpload from "./upload/AudioUpload";
 import Engagement from "./upload/Engagement";
-import Evaluation from "./upload/Evaluation";
 import ProfilePics from "./upload/ProfilePics";
 import TitleDescription from "./upload/TitleDescription";
+import CategorySelect from "./browse/CategorySelect";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft, createPic } from "../assets";
 import { useState } from "react";
@@ -14,8 +14,8 @@ const Create: React.FC = () => {
   const [title, setTitle] = useState("");
   const [profilePic, setProfilePic] = useState<File | null>(null);
   const [audio, setAudio] = useState<File | null>(null);
+  const [category, setCategory] = useState("");
   const [audience, setAudience] = useState("");
-  const [evaluation, setEvaluation] = useState("");
   const [engagement, setEngagement] = useState<string[]>([]);
   const [description, setDescription] = useState("");
   const userId = localStorage.getItem("user_id") || "";
@@ -30,9 +30,9 @@ const Create: React.FC = () => {
     formData.append("description", description);
     if (profilePic) formData.append("profile_pics", profilePic);
     if (audio) formData.append("audio", audio);
+    formData.append("category_id", category);
     formData.append("user_id", userId);
     formData.append("audience", audience);
-    formData.append("evaluation", evaluation);
     formData.append("engagement", JSON.stringify(engagement));
 
     try {
@@ -102,10 +102,10 @@ const Create: React.FC = () => {
               onDescriptionChange={setDescription}
             />
           </div>
-          {/* Evaluation and Audience */}
+          {/* Category and Audience */}
           <div className="flex flex-row justify-between gap-4">
-            <Evaluation value={evaluation} onChange={setEvaluation} />
             <Audience value={audience} onChange={setAudience} />
+            <CategorySelect value={category} onChange={setCategory} />
           </div>
           <Engagement value={engagement} onChange={setEngagement} />
           <div>
