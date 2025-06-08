@@ -56,7 +56,7 @@ const ArtistProfile: React.FC = () => {
                 Password
               </li>
               <li
-                className="hover:bg-gray-800 rounded-lg transition p-3 cursor-pointer text-red-700 font-semibold text-lg"
+                className=" rounded-lg transition p-3 cursor-pointer text-red-700 font-semibold text-lg"
               >
                 <LogOut />
               </li>
