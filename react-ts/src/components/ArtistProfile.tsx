@@ -6,7 +6,9 @@ import Password from "./profile/Password";
 
 const ArtistProfile: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [modal, setModal] = useState<"profile" | "password" | "logout" | null>(null);
+  const [modal, setModal] = useState<"profile" | "password" | null>(
+    null
+  );
 
   // Close modal when clicking outside
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -54,18 +56,14 @@ const ArtistProfile: React.FC = () => {
                 Password
               </li>
               <li
-                className="hover:bg-gray-800 rounded-lg transition p-3 cursor-pointer text-white"
-                onClick={() => {
-                  setModal("logout");
-                  setIsOpen(false);
-                }}
+                className="hover:bg-gray-800 rounded-lg transition p-3 cursor-pointer text-red-700 font-semibold text-lg"
               >
-                Log Out
+                <LogOut />
               </li>
             </ul>
           </div>
         )}
-        {/* Modal for Profile or Log Out */}
+        {/* Modal for Profile */}
         {modal && (
           <div
             className="fixed inset-0 bg-opacity-10 flex items-center justify-center z-50"
@@ -79,7 +77,6 @@ const ArtistProfile: React.FC = () => {
                 &times;
               </button>
               {modal === "profile" && <Profiles />}
-              {modal === "logout" && <LogOut />}
               {modal === "password" && <Password />}
             </div>
           </div>

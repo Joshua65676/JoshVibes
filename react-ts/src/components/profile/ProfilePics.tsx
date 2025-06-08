@@ -40,8 +40,12 @@ const ProfilePics: React.FC = () => {
                 className="w-35 h-35 rounded-full object-cover relative -top-35 border-4 border-Bule"
               />
             )}
-            <div className="bg-Bule w-10 h-10 rounded-full relative p-2 -top-45 left-21">
-              <MdEdit className="w-6 h-6 text-White cursor-pointer" />
+            <div>
+              {image && (
+                <div className="bg-Bule w-10 h-10 rounded-full relative p-2 -top-45 left-21">
+                  <MdEdit className="w-6 h-6 text-White cursor-pointer" />
+                </div>
+              )}
             </div>
           </div>
         </div>

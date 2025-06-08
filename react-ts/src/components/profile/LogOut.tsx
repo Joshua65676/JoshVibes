@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const LogOut: React.FC = () => {
-  return (
-    <div>LogOut</div>
-  )
-}
+  return <div>Log out</div>;
+};
 
-export default LogOut
+export default LogOut;

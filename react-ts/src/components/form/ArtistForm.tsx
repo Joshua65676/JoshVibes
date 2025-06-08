@@ -132,7 +132,7 @@ const ArtistForm = () => {
               {showPassword ? <FaEye /> : <FaEyeSlash />}
             </button>
             <span className="text-left block text-sm font-medium text-GrayText">
-              Must contain at least 8 characters
+              Must contain at least 5 characters
             </span>
             {errors.password && (
               <p className="text-red-500 text-sm mt-1">{errors.password}</p>
