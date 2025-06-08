@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const WelcomePage = () => {
   return (
     <section className="container max-w-7xl mx-auto w-full">
-      <main className="w-full flex flex-row items-center justify-center ">
+      <main className="w-full flex flex-row items-center justify-between ">
         <main className="flex flex-col gap-8 ">
           <div className="flex flex-col gap-5">
             <h1 className="text-2xl text-left w-8/12 leading-[26.5px] -tracking-[2.5%] font-bold text-[#FFFFFF]">
@@ -31,7 +31,7 @@ const WelcomePage = () => {
           </div>
         </main>
 
-        <main className="flex flex-col gap-12 -mt-10">
+        <main className="flex flex-col gap-12">
           <img src={WelcomePics} alt="Welcome" className="w-[23.5rem] " />
           <div className="flex flex-col gap-1.5 items-center">
             <Link to="/signupartist">

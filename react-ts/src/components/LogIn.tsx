@@ -6,7 +6,7 @@ const LogIn = () => {
   const navigate = useNavigate();
   return (
     <section className="container max-w-7xl mx-auto w-full">
-      <main className="w-full h-80 flex flex-row items-center justify-center gap-10">
+      <main className="w-full h- flex flex-row items-center justify-center gap-10">
         {/* Image and Back Button */}
         <div className="flex flex-col gap-5">
           {/* Back Button */}
