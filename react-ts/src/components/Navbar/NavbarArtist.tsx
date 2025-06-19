@@ -5,7 +5,7 @@ import HomeButtonArtist from "../ui/HomeButtonArtist";
 import SearchButton from "../ui/SearchButton";
 import { useEffect, useState } from "react";
 import NotificationButton from "../ui/NotificationButton";
-import ArtistProfile from "../ArtistProfile";
+import ArtistProfile from "../Profile";
 const Navbar: React.FC = () => {
   const [stickyClass, setStickyClass] = useState<boolean>(false);
   const navigate = useNavigate();

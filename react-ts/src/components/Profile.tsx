@@ -4,7 +4,7 @@ import Profiles from "./profile/Profile";
 import LogOut from "./profile/LogOut";
 import Password from "./profile/Password";
 
-const ArtistProfile: React.FC = () => {
+const Profiless: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [modal, setModal] = useState<"profile" | "password" | null>(
     null
@@ -86,4 +86,4 @@ const ArtistProfile: React.FC = () => {
   );
 };
 
-export default ArtistProfile;
+export default Profiless;
