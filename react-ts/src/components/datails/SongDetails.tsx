@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import Navbar from "../Navbar";
+import Navbar from "../Navbar/NavbarArtist";
 import DetailsAnalytics from "./DetailsAnalytics";
 import { FaPlay, FaPause } from "react-icons/fa";
 import { Button } from "../ui/Button";

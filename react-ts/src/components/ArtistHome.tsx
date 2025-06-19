@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "./Navbar";
+import Navbar from "./Navbar/NavbarArtist";
 import HomeAanlytics from "./homeAanlytics/HomeAanlytics";
 import LastUpload from "./upload/LastUpload";
 import LatestFeedback from "./feedback/LatestFeedback";

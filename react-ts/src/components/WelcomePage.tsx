@@ -31,7 +31,7 @@ const WelcomePage = () => {
           </div>
         </main>
 
-        <main className="flex flex-col gap-12">
+        <main className="flex flex-col gap-12 mt-20">
           <img src={WelcomePics} alt="Welcome" className="w-[23.5rem] " />
           <div className="flex flex-col gap-1.5 items-center">
             <Link to="/signupartist">
