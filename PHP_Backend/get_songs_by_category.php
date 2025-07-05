@@ -1,5 +1,7 @@
 <?php
 require_once './database.php';
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json");
 
 $categoryId = $_GET['id'] ?? 0;
 
