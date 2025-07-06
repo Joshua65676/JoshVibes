@@ -39,9 +39,9 @@ const CategoriesHome: React.FC = () => {
 
         <Link
           to="/all-categories"
-          className="text-blue-500 font-semibold block text-end"
+          className="block text-end"
         >
-          View All →
+          <span className="text-GrayText font-bold text-sm font-sans">View All →</span>
         </Link>
       </div>
     </section>

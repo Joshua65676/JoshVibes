@@ -1,6 +1,7 @@
 import type React from "react";
 import NavbarListener from "./Navbar/NavbarListener";
 import Category from "./listenerHomePage/Category";
+import NewRelease from "./listenerHomePage/NewRelease";
 
 const ListenerHome: React.FC = () => {
   return (
@@ -11,8 +12,9 @@ const ListenerHome: React.FC = () => {
         </div>
         <main className="flex flex-col gap-10">
           <Category />
+          <NewRelease />
           {/* <LastUpload />
-          <LatestFeedback /> */}
+            <LatestFeedback /> */}
         </main>
       </main>
     </section>
