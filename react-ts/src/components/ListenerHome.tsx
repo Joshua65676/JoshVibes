@@ -1,8 +1,8 @@
-// import React from 'react'
-import NavbarListener from "./Navbar/NavbarListener"
-import Category from "./listenerHomePage/Category"
+import type React from "react";
+import NavbarListener from "./Navbar/NavbarListener";
+import Category from "./listenerHomePage/Category";
 
-const ListenerHome = () => {
+const ListenerHome: React.FC = () => {
   return (
     <section className="container max-w-7xl mx-auto w-full">
       <main className="flex flex-col">
@@ -16,7 +16,7 @@ const ListenerHome = () => {
         </main>
       </main>
     </section>
-  )
-}
+  );
+};
 
-export default ListenerHome
+export default ListenerHome;

@@ -14,7 +14,7 @@ if (!is_dir('uploads/audio')) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $user_id = $_POST['user_id']; // User ID
+    $user_id = $_POST['user_id'];
     $title = $_POST['title'];
     $description = $_POST['description'];
     $audience = $_POST['audience'];

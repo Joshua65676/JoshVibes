@@ -25,7 +25,7 @@ const CategoriesHome: React.FC = () => {
     <section className="container max-w-7xl mx-auto w-full p-2">
       <div className="flex flex-col gap-8">
         <h1 className="text-xl font-bold text-start">Featured Categories</h1>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-4 h-[10rem]">
           {categories.slice(0, 4).map((cat) => (
             <button
               key={cat.id}
