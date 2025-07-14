@@ -6,6 +6,7 @@
   --color-GrayBg: rgba(60, 60, 67, 0.29);
   --color-LightWhite: #f2f2f7;
   --color-SpanText: rgba(255, 255, 255, 0.5);
+  --color-BlackBg: #242424;
 }
 
 :root {

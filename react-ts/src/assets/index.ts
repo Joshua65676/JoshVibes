@@ -3,7 +3,8 @@ import { FaLongArrowAltRight } from "react-icons/fa";
 import { IoChevronDown } from "react-icons/io5";
 import WallPaper from "./wallpaper_pics.svg";
 import { FaArrowLeft } from "react-icons/fa6";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaPlay, FaPause, FaStepBackward, FaStepForward, FaRandom } from "react-icons/fa";
+import { FaRepeat } from "react-icons/fa6";
 import  musicPics_1  from "./images/musicPics_1.jpg"
 import  musicPics_2  from "./images/musicPics_2.jpg"
 import  musicPics_3  from "./images/musicPics_3.jpg"
@@ -46,5 +47,11 @@ export {
     SongUpload,
     CreateButton,
     IoChevronDown,
-    createPic
+    createPic,
+    FaPlay,
+    FaPause,
+    FaStepBackward,
+    FaStepForward,
+    FaRandom,
+    FaRepeat
 }

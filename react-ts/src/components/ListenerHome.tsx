@@ -2,6 +2,7 @@ import type React from "react";
 import NavbarListener from "./Navbar/NavbarListener";
 import Category from "./listenerHomePage/Category";
 import NewRelease from "./listenerHomePage/NewRelease";
+import SongControl from "./control/SongControl";
 
 const ListenerHome: React.FC = () => {
   return (
@@ -16,6 +17,10 @@ const ListenerHome: React.FC = () => {
           {/* <LastUpload />
             <LatestFeedback /> */}
         </main>
+        {/* <SongControl /> */}
+        <footer>
+          <SongControl />
+        </footer>
       </main>
     </section>
   );

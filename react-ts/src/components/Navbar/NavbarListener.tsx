@@ -24,21 +24,21 @@ const Navbar: React.FC = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50  ${
         stickyClass
-          ? "bg-white/20 backdrop-blur-sm border-b border-slate-300 shadow-lg"
+          ? "bg-BlackBg backdrop-blur-sm border-b border-slate-500 shadow-lg"
           : ""
       }`}
     >
       <section className="container max-w-6xl mx-auto w-full ">
-        <main className="flex flex-row justify-between items-center p-4">
+        <main className="flex flex-row justify-between items-center p-1">
           {/* Back Button */}
           <div className="">
             <button
               type="button"
               onClick={() => navigate(-1)}
-              className="group flex flex-col items-center absolute top-16 left-14 transform -translate-y-1/2"
+              className="group flex flex-col items-center absolute top-12 left-14 transform -translate-y-1/2"
             >
               <MdArrowBackIos className="w-8 h-8 text-gray-600" />
-              <span className="text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+              <span className="text-White opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                 Go Back
               </span>
             </button>

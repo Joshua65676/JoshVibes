@@ -24,7 +24,7 @@ const Navbar: React.FC = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50  ${
         stickyClass
-          ? "bg-white/20 backdrop-blur-sm border-b border-slate-300 shadow-lg"
+          ? "bg-GrayBg backdrop-blur-sm border border-slate-300 shadow-md"
           : ""
       }`}
     >

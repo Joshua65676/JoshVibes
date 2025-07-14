@@ -33,7 +33,7 @@ const SongHome: React.FC = () => {
     // Play the selected audio
     const audio = audioRefs.current[id];
     if (audio) {
-      audio.currentTime = 0; // Optional: start from beginning
+      audio.currentTime = 0;
       audio.play();
     }
   };
