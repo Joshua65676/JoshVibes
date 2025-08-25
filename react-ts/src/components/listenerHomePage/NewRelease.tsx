@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import SongHome from "../songs/SongHome";
 
 const NewRelease: React.FC = () => {
-  // const navigate = useNavigate();
 
   return (
     <section className="container max-w-7xl mx-auto w-full -ml-4">

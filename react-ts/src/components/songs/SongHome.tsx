@@ -1,20 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { FaPlay } from "react-icons/fa";
+import { usePlayer } from "./PlayerContext";
+import type { Song } from "./PlayerContext"
 import { Button } from "../ui/Button";
 
-interface Song {
-  id: number;
-  title: string;
-  audio: string;
-  artist_name: string;
-  profile_pics: string;
-}
-
 const SongHome: React.FC = () => {
-  const [songs, setSongs] = useState<Song[]>([]);
-  // Store refs for each audio element by song id
-  const audioRefs = useRef<{ [key: number]: HTMLAudioElement | null }>({});
+  const {songs, setSongs, setCurrentIndex } = usePlayer();
 
   useEffect(() => {
     axios
@@ -23,26 +15,20 @@ const SongHome: React.FC = () => {
         setSongs(res.data);
       })
       .catch((err) => console.error("Error fetching songs", err));
-  }, []);
+  }, [setSongs]);
 
   const handlePlay = (id: number) => {
-    // Pause all other audios
-    Object.values(audioRefs.current).forEach((audio) => {
-      if (audio && !audio.paused) audio.pause();
-    });
-    // Play the selected audio
-    const audio = audioRefs.current[id];
-    if (audio) {
-      audio.currentTime = 0;
-      audio.play();
+    const index =  songs.findIndex(song => song.id === id);
+    if (index !== -1) {
+      setCurrentIndex(index);
     }
   };
 
   return (
     <section className="overflow-x-auto">
       <main className="flex gap-8 flex-row">
-        {songs.slice(0, 5).map((song) => (
-          <main
+        {songs.slice(0, 5).map((song: Song) => (
+          <div
             key={song.id}
             className="hover:bg-GrayBg relative group w-52 p-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
           >
@@ -71,13 +57,8 @@ const SongHome: React.FC = () => {
               >
                 <FaPlay className="text-LightWhite text-xl" />
               </Button>
-              <audio
-                ref={(el) => (audioRefs.current[song.id] = el)}
-                src={`http://localhost/joshvibes/PHP_Backend/${song.audio}`}
-                className="w-full"
-              />
             </div>
-          </main>
+          </div>
         ))}
       </main>
     </section>
