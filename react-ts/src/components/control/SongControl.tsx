@@ -60,11 +60,18 @@ const SongControl: React.FC = () => {
   }, [currentIndex, songs]);
 
   return (
-    <footer className="fixed bottom-0 left-0 right-0 bg-BlackBg border-t border-slate-500 text-white px-6 py-2 shadow-lg z-50">
+    <footer className="fixed flex flex-row bottom-0 left-0 right-0 bg-BlackBg border-t border-slate-500 text-white px-6 py-0 shadow-lg z-50">
       {currentSong && (
-        <div>
-          <h2>{currentSong.title}</h2>
-          <span>{currentSong.artist_name}</span>
+        <div className="flex flex-row gap-2">
+          <img
+            src={`http://localhost/joshvibes/PHP_Backend/${currentSong.profile_pics}`}
+            alt={currentSong.title}
+            className="w-19 h-19 mt-2 object-cover rounded"
+          />
+          <div className="flex flex-col text-start justify-center">
+            <h2 className="text-lg font-bold text-LightWhite">{currentSong.title}</h2>
+            <span className="text-sm text-GrayText font-semibold">{currentSong.artist_name}</span>
+          </div>
         </div>
       )}
       <div className=" flex flex-row items-center justify-center max-w-3xl mx-auto">
@@ -147,6 +154,10 @@ const SongControl: React.FC = () => {
             } transition`}
           />
         </button>
+      </div>
+
+      <div>
+        {/* Placeholder for future volume control or additional features */}
       </div>
 
       {currentSong && (
