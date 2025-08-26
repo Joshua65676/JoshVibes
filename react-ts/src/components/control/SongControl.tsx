@@ -8,6 +8,7 @@ import {
   FaRandom,
   FaRepeat,
 } from "../../assets/index";
+import { motion } from "framer-motion";
 
 const SongControl: React.FC = () => {
   const {
@@ -59,22 +60,53 @@ const SongControl: React.FC = () => {
     }
   }, [currentIndex, songs]);
 
+  const footerVariants = {
+    hidden: { opacity: 0, y: 100 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.4,
+        delay: 0.2,
+      },
+    },
+  };
+
   return (
-    <footer className="fixed flex flex-row bottom-0 left-0 right-0 bg-BlackBg border-t border-slate-500 text-white px-6 py-0 shadow-lg z-50">
-      {currentSong && (
-        <div className="flex flex-row gap-2">
-          <img
-            src={`http://localhost/joshvibes/PHP_Backend/${currentSong.profile_pics}`}
-            alt={currentSong.title}
-            className="w-19 h-19 mt-2 object-cover rounded"
-          />
-          <div className="flex flex-col text-start justify-center">
-            <h2 className="text-lg font-bold text-LightWhite">{currentSong.title}</h2>
-            <span className="text-sm text-GrayText font-semibold">{currentSong.artist_name}</span>
-          </div>
-        </div>
-      )}
-      <div className=" flex flex-row items-center justify-center max-w-3xl mx-auto">
+    <motion.footer
+      className="fixed bottom-0 left-0 right-0 bg-BlackBg border-t border-slate-500 text-white px-5 py-10 shadow-lg z-10"
+      variants={footerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <main className="flex flex-row justify-between items-center w-full py-2">
+        {currentSong && (
+          <motion.div
+           className="flex flex-row gap-2 fixed"
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{
+                duration: 0.4,
+                scale: { type: "spring", visualDuration: 0.4, bounce: 0.5 },
+            }}
+           >
+            <img
+              src={`http://localhost/joshvibes/PHP_Backend/${currentSong.profile_pics}`}
+              alt={currentSong.title}
+              className="w-19 h-19 mt-2 object-cover rounded"
+            />
+            <div className="flex flex-col text-start justify-center">
+              <h2 className="text-lg font-bold text-LightWhite">
+                {currentSong.title}
+              </h2>
+              <span className="text-sm text-GrayText font-semibold">
+                {currentSong.artist_name}
+              </span>
+            </div>
+          </motion.div>
+        )}
+  
+      <div className="fixed right-0 left-0 p-6 flex flex-row items-center justify-center max-w-3xl mx-auto">
         <button
           type="button"
           onClick={() => setRepeat(!repeat)}
@@ -158,6 +190,7 @@ const SongControl: React.FC = () => {
 
       <div>
         {/* Placeholder for future volume control or additional features */}
+        <span></span>
       </div>
 
       {currentSong && (
@@ -169,7 +202,8 @@ const SongControl: React.FC = () => {
           onPause={() => setIsPlaying(false)}
         />
       )}
-    </footer>
+      </main>
+    </motion.footer>
   );
 };
 

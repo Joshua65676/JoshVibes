@@ -25,7 +25,7 @@ const SongHome: React.FC = () => {
   };
 
   return (
-    <section className="overflow-x-auto">
+    <section className="overflow-x-auto mb-15">
       <main className="flex gap-8 flex-row">
         {songs.slice(0, 5).map((song: Song) => (
           <div
